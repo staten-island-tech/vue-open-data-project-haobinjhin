@@ -1,32 +1,44 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import IncidentsCard from '@/components/IncidentsCard.vue';
 import {ref, onMounted} from 'vue'
 
-const fireincident = ref("")
+const incidents = ref("")
 async function getincident(){
-
   try {
     let response = await fetch('https://data.cityofnewyork.us/resource/ii3r-svjz.json')
     let data = await response.json();
-    fireincident.value = data;
-    console.log(fireincident.value)
+    incidents.value = data;
+    console.log(incidents.value)
   } catch (error){
     console.log("error")
   }
 
 }
 
-getincident()
-
-
-
+onMounted(() => {
+  getincident();
+})
 
 
 
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+
+  <div class="container">
+
+    <IncidentsCard
+    v-for="(incident, index) in incidents"
+    :key="incident.case_number"
+    :id="index + 1"
+    :incidents = "incident"
+    />  
+
+  </div>
+  
 </template>
+
+<style scoped>
+
+
+</style>
