@@ -40,5 +40,11 @@ onMounted(() => {
 
 <style scoped>
 
+.container{
+  display: flex;
+  flex: 20%;
+  flex-wrap: wrap;
+}
+
 
 </style>
