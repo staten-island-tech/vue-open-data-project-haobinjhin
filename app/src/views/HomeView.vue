@@ -2,7 +2,7 @@
 import IncidentsCard from '@/components/IncidentsCard.vue';
 import {ref, onMounted} from 'vue'
 
-const incidents = ref("")
+const incidents = ref([])
 async function getincident(){
   try {
     let response = await fetch('https://data.cityofnewyork.us/resource/ii3r-svjz.json')
@@ -12,8 +12,8 @@ async function getincident(){
   } catch (error){
     console.log("error")
   }
-
 }
+
 
 onMounted(() => {
   getincident();
