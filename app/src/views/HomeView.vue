@@ -8,7 +8,8 @@ async function getincident(){
     let response = await fetch('https://data.cityofnewyork.us/resource/ii3r-svjz.json')
     let data = await response.json();
     incidents.value = data;
-    console.log(incidents.value)
+    let bk = incidents.value.filter((incident) => incident.borough == "Brooklyn")
+    console.log(bk)
   } catch (error){
     console.log("error")
   }

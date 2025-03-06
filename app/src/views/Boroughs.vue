@@ -1,20 +1,26 @@
 <template>
-  <div class="Brough">
+  <div class="Borough">
     <h1></h1>
   </div>
 </template>
 
 <script setup>
+import {ref, onMounted} from 'vue'
 
+const nycincident = ref([])
 async function boroughincidents(){
 
   try{
+    
+
 
   } catch(error){
-    
+
   }
 
 }
+
+onMounted(() => {boroughincidents();})
 
 
 </script>
