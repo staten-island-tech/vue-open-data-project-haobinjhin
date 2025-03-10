@@ -9,7 +9,6 @@ import {ref, onMounted} from 'vue'
 
 const nycincident = ref([])
 async function boroughincidents(){
-
   try{
     
 

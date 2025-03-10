@@ -2,23 +2,51 @@
 import IncidentsCard from '@/components/IncidentsCard.vue';
 import {ref, onMounted} from 'vue'
 
-const incidents = ref([])
+
+const boroughCount = ref({})
+
 async function getincident(){
   try {
     let response = await fetch('https://data.cityofnewyork.us/resource/ii3r-svjz.json')
     let data = await response.json();
-    incidents.value = data;
-    let bk = incidents.value.filter((incident) => incident.borough == "Brooklyn")
-    console.log(bk)
+    return data
+    
   } catch (error){
     console.log("error")
   }
 }
 
-
 onMounted(() => {
-  getincident();
-})
+  const boroughs = ["Brooklyn", "Queens", "Manhattan", "Bronx", "Staten Island"]
+
+  let allIncidents = getincident();
+
+  console.log(allIncidents)
+
+  let percentage = []
+
+
+
+  boroughs.forEach((borough) => { 
+    
+    allIncidents.forEach((incident) => {
+    if (incident.borough == borough) {
+      boroughCount[element] += 1
+    } else {
+      boroughCount[element] = 1
+  };
+
+  let boroughpercent = (allIncidents.length/boroughCount)*100
+  percentage.push(boroughpercent)
+})})
+
+console.log(percentage)
+
+
+
+
+}
+)
 
 
 
