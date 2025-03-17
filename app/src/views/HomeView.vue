@@ -1,52 +1,47 @@
 <script setup>
 import IncidentsCard from '@/components/IncidentsCard.vue';
-import { elements } from 'chart.js';
 import {ref, onMounted} from 'vue'
 
 
-const boroughCount = ref({})
+let boroughCount = 0
 
 const allIncidents = ref([])
 
 async function getincident(){
   try {
-    let response = await fetch('https://data.cityofnewyork.us/resource/ii3r-svjz.json')
-    let data = await response.json();
-    allIncidents.value = data.results
+    let res = await fetch('https://data.cityofnewyork.us/resource/ii3r-svjz.json')
+    let data = await res.json();
+
+    return data
     
   } catch (error){
     console.log("error")
   }
 }
 
+
 onMounted(() => {
 
-  getincident();
-
+  let allIncidents = getincident();
   console.log(allIncidents)
 
   const boroughs = ["Brooklyn", "Queens", "Manhattan", "Bronx", "Staten Island"]
 
-
-
   let percentage = []
 
-  
-
-  boroughs.forEach((singborough) => { 
+  boroughs.forEach((singleborough) => { 
     
-    allIncidents.value.filter((maybeborough) => {
-      if(maybeborough.borough == singborough){
-        boroughCount[element] += 1 
+    allIncidents.filter((maybeborough) => {
+      if(maybeborough.borough == singleborough){
+        boroughCount += 1 
     } else { 
-      boroughCount[element] = 1
+      boroughCount = 1
     }
   })
 
   let boroughpercent = (boroughCount/allIncidents.length)*100
   percentage.push(boroughpercent)
-
-  console.log(percentage)
+  boroughCount = 0
 })})
 
 
