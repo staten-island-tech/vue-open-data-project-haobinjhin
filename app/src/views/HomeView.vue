@@ -10,9 +10,11 @@ const allIncidents = ref([])
 async function getincident(){
   try {
     let res = await fetch('https://data.cityofnewyork.us/resource/ii3r-svjz.json')
-    let data = await res.json();
 
-    return data
+    if (res.ok){
+      const data = await res.json();
+
+    }
     
   } catch (error){
     console.log("error")
@@ -22,17 +24,22 @@ async function getincident(){
 
 onMounted(() => {
 
-  let allIncidents = getincident();
-  console.log(allIncidents)
+  allIncidents.value.push(getincident())
 
-  const boroughs = ["Brooklyn", "Queens", "Manhattan", "Bronx", "Staten Island"]
+  allIncidents.value.forEach((things) => {
+    if (things.borough === "Brooklyn"){
+      console.log(things)
+    }
+  }) 
+
+   const boroughs = ["Brooklyn", "Queens", "Manhattan", "Bronx", "Staten Island"]
 
   let percentage = []
 
   boroughs.forEach((singleborough) => { 
     
-    allIncidents.filter((maybeborough) => {
-      if(maybeborough.borough == singleborough){
+    allIncidents.value.filter((maybeborough) => {
+      if(maybeborough.borough === singleborough){
         boroughCount += 1 
     } else { 
       boroughCount = 1
@@ -42,14 +49,14 @@ onMounted(() => {
   let boroughpercent = (boroughCount/allIncidents.length)*100
   percentage.push(boroughpercent)
   boroughCount = 0
-})})
+  
+})
+
+console.log(...percentage)
+ 
 
 
-
-
-
-
-
+})
 
 
 </script>
