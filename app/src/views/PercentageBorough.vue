@@ -1,7 +1,7 @@
 <template>
   <br>
-  <div class="container"><canvas ref="bargraphofincidents"></canvas></div>
- 
+  <div class="container"><canvas ref="percentageofincidents"></canvas></div>
+  
 </template>
 
 <script setup>
@@ -22,36 +22,40 @@ async function getincident() {
   }
 }
 
-const bargraphofincidents = ref(null)
 
-onMounted(async() => {
+const percentageofincidents = ref(null)
+
+onMounted(async () => {
   const allIncidents = await getincident()
+
   const boroughs = ['Brooklyn', 'Queens', 'Manhattan', 'Bronx', 'Staten Island']
-  let tempborough = []
-  const numofborough = ref([])
+
+  let boroughCount = 0
+
+  const percentage = ref([])
 
   boroughs.forEach((singleborough) => {
-    allIncidents.filter((incident) => {
+    allIncidents.forEach((incident) => {
       if (incident.borough == singleborough) {
-        tempborough.push(incident.borough)
+        boroughCount++
       }
     })
-    numofborough.value.push(tempborough.length)
-    tempborough = []
-  })  
-    console.log(numofborough.value)
+    let boroughpercent = Math.round((boroughCount / allIncidents.length) * 1000)/10
+    percentage.value.push(boroughpercent)
+    boroughCount = 0
+  })
 
-    if (bargraphofincidents.value){
+  if (percentageofincidents.value){
     new Chart(
-      bargraphofincidents.value,
+      percentageofincidents.value,
       {
-        type:'bar',
+        type:'pie',
         data:{
           labels: boroughs,
           datasets: [
             {
-              label: "Number of Incidents",
-              data: numofborough.value,
+              label: "Percentage of Incidents",
+              data: percentage.value,
               backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#17f6fa", "#fa17d8"]
             }
           ]
@@ -59,24 +63,16 @@ onMounted(async() => {
         options: {
           responsive: true,
           
-        }
-      }
+    }
+  }
     )
   }
-
-
-
 })
 </script>
 
-<style>
+<style scoped>
 
 
-@media (max-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
+
+
 </style>

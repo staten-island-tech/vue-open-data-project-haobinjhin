@@ -1,39 +1,39 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <h1>Fire Incidents In NYC</h1>
+  <br>
+  <header>
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/">Percentage of Fire Incidents Between Boroughs</RouterLink>
         <RouterLink to="/Borough">Borough</RouterLink>
       </nav>
-    </div>
+    
   </header>
 
   <RouterView />
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+
+h1{
+  text-align: center;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+header {
+  max-height: 100vh;
+  max-width: 100vw;
 }
+
+
 
 nav {
   width: 100%;
-  font-size: 12px;
+  font-size: 20px;
   text-align: center;
   margin-top: 2rem;
 }
