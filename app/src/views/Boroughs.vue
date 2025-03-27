@@ -1,5 +1,6 @@
 <template>
   <br>
+
   <div class="container"><canvas ref="bargraphofincidents"></canvas></div>
  
 </template>
@@ -39,7 +40,6 @@ onMounted(async() => {
     numofborough.value.push(tempborough.length)
     tempborough = []
   })  
-    console.log(numofborough.value)
 
     if (bargraphofincidents.value){
     new Chart(
@@ -71,12 +71,13 @@ onMounted(async() => {
 
 <style>
 
-
-@media (max-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+canvas{
+  height: 500px;
+  width: auto;
 }
+
+
+
+
+
 </style>

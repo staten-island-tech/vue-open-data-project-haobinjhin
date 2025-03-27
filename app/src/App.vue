@@ -9,7 +9,7 @@ import { RouterLink, RouterView } from 'vue-router'
   <header>
 
       <nav>
-        <RouterLink to="/">Percentage of Fire Incidents Between Boroughs</RouterLink>
+        <RouterLink to="/">Percentage</RouterLink>
         <RouterLink to="/Borough">Borough</RouterLink>
       </nav>
     
@@ -22,6 +22,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 h1{
   text-align: center;
+  margin: 0;
 }
 
 header {
